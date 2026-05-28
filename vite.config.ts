@@ -21,15 +21,19 @@ function getLanHttpsConfig() {
 }
 
 const lanHttps = getLanHttpsConfig()
+const allowedHosts = ['.loca.lt']
 
 export default defineConfig({
   server: lanHttps
     ? {
+        allowedHosts,
         host: '0.0.0.0',
         port: 4173,
         https: lanHttps,
       }
-    : undefined,
+    : {
+        allowedHosts,
+      },
   build: {
     rollupOptions: {
       input: {
